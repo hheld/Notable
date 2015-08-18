@@ -44,4 +44,20 @@ router.post('/note', function(req, res) {
     });
 });
 
+router.delete('/note/:id', function(req, res) {
+    var noteId = req.params.id;
+
+    if(!noteId) {
+        return res.json('Could not delete note with id ' + noteId);
+    }
+
+    noteDb.deleteNote(noteId)
+    .then(function() {
+        res.json('Successfully deleted note with id ' + noteId);
+    })
+    .catch(function(err) {
+        res.json('There was an error trying to delete note with id ' + noteId + ': ' + err);
+    });
+});
+
 module.exports = router;

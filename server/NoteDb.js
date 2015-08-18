@@ -109,3 +109,17 @@ exports.addNote = function(note) {
         }
     );
 };
+
+exports.deleteNote = function(id) {
+    return new Promise(
+        function(resolve, reject) {
+            db.run("DELETE FROM Notes WHERE Id=?", id, function(err){
+                if(err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        }
+    );
+};
