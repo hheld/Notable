@@ -1,0 +1,20 @@
+var express = require('express'),
+    router  = express.Router(),
+    noteDb  = require('./NoteDb');
+
+/* E.g.: /notes?from=2014-08-21T00:00:00&to=2014-08-25T15:45:12&tags=tag1%20tag2 */
+router.get('/notes', function(req, res) {
+    var from = Date.parse(req.query.from) || 0x00000000,
+        to   = Date.parse(req.query.to)   || 0x7FFFFFFF,
+        tags = req.query.tags             || '';
+
+    noteDb.getAllNotes(from, to, tags)
+    .then(function(notes) {
+        res.json(notes);
+    })
+    .catch(function(err) {
+        res.json('There was an error trying to get the notes: ' + err);
+    });
+});
+
+module.exports = router;

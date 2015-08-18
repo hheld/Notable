@@ -1,5 +1,5 @@
 {
     "verbose": true,
-    "ignore": ["dist/", "client/", "node_modules/", ".git/", "bower_components/"],
+    "ignore": ["dist/", "client/", "node_modules/", ".git/", "bower_components/", "*.sdb"],
     "ext": "js json"
 }
