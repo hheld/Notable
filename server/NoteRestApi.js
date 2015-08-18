@@ -42,7 +42,13 @@ router.route('/note/:id')
     });
 })
 .put(function(req, res) {
-
+    noteDb.updateNote(req.noteId, req.body)
+    .then(function() {
+        res.json('Successfully updated note with id ' + req.noteId);
+    })
+    .catch(function(err) {
+        res.json('There was an error trying to update note with id ' + req.noteId + ': ' + err);
+    });
 })
 .delete(function(req, res) {
     noteDb.deleteNote(req.noteId)

@@ -1,6 +1,7 @@
 var sqlite3 = require('sqlite3'),
     path    = require('path'),
-    db      = new sqlite3.Database(path.join(__dirname, 'notes.sdb'));
+    db      = new sqlite3.Database(path.join(__dirname, 'notes.sdb')),
+    merge   = require('object-assign');
 
 (function createDatabaseStructure() {
     db.serialize(function() {
@@ -97,7 +98,9 @@ exports.addNote = function(note) {
         function(resolve, reject) {
             var stmt = db.prepare("INSERT INTO Notes (Title, Tags, CreationDate, LastModDate, Note) VALUES (?,?,?,?,?)");
 
-            stmt.run([note.title, note.tags, note.creationDate, note.lastModDate, note.note], function(err) {
+            var creationDate = new Date().toISOString();
+
+            stmt.run([note.title, note.tags, creationDate, creationDate, note.note], function(err) {
                 if(err) {
                     return reject(err);
                 }
@@ -119,6 +122,35 @@ exports.deleteNote = function(id) {
                 } else {
                     resolve();
                 }
+            });
+        }
+    );
+};
+
+exports.updateNote = function(id, note) {
+    return new Promise(
+        function(resolve, reject) {
+            // get the note from the Database
+            exports.getNote(id)
+            .then(function(noteDb) {
+                var updatedNote = merge({}, noteDb, note);
+
+                db.run("UPDATE Notes SET Title=?, Tags=?, LastModDate=?, Note=? WHERE Id=?", [
+                    updatedNote.title,
+                    updatedNote.tags,
+                    new Date().toISOString(),
+                    updatedNote.note,
+                    id
+                ], function(err){
+                    if(err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            })
+            .catch(function(err) {
+                return reject(err);
             });
         }
     );
