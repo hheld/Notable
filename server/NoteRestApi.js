@@ -17,23 +17,6 @@ router.get('/notes', function(req, res) {
     });
 });
 
-/* E.g.: /note/1 */
-router.get('/note/:id', function(req, res) {
-    var noteId = req.params.id;
-
-    if(!noteId) {
-        return res.json('Could not get note with id ' + noteId);
-    }
-
-    noteDb.getNote(noteId)
-    .then(function(note) {
-        res.json(note);
-    })
-    .catch(function(err) {
-        res.json('There was an error trying to get a note: ' + err);
-    });
-});
-
 router.post('/note', function(req, res) {
     noteDb.addNote(req.body)
     .then(function() {
@@ -44,19 +27,30 @@ router.post('/note', function(req, res) {
     });
 });
 
-router.delete('/note/:id', function(req, res) {
-    var noteId = req.params.id;
-
-    if(!noteId) {
-        return res.json('Could not delete note with id ' + noteId);
-    }
-
-    noteDb.deleteNote(noteId)
-    .then(function() {
-        res.json('Successfully deleted note with id ' + noteId);
+router.route('/note/:id')
+.all(function(req, res, next) {
+    req.noteId = req.params.id;
+    next();
+})
+.get(function(req, res) {
+    noteDb.getNote(req.noteId)
+    .then(function(note) {
+        res.json(note);
     })
     .catch(function(err) {
-        res.json('There was an error trying to delete note with id ' + noteId + ': ' + err);
+        res.json('There was an error trying to get a note: ' + err);
+    });
+})
+.put(function(req, res) {
+
+})
+.delete(function(req, res) {
+    noteDb.deleteNote(req.noteId)
+    .then(function() {
+        res.json('Successfully deleted note with id ' + req.noteId);
+    })
+    .catch(function(err) {
+        res.json('There was an error trying to delete note with id ' + req.noteId + ': ' + err);
     });
 });
 
