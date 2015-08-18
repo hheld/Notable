@@ -34,4 +34,14 @@ router.get('/note/:id', function(req, res) {
     });
 });
 
+router.post('/note', function(req, res) {
+    noteDb.addNote(req.body)
+    .then(function() {
+        res.json('Successfully added note.');
+    })
+    .catch(function(err) {
+        res.json('There was an error trying to add this note: ', req.body);
+    });
+});
+
 module.exports = router;

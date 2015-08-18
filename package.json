@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "alt": "^0.17.1",
+    "body-parser": "^1.13.3",
     "compression": "^1.4.3",
     "express": "^4.12.3",
     "morgan": "^1.5.2",

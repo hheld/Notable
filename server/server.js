@@ -6,9 +6,13 @@ var express     = require('express'),
     morgan      = require('morgan'),
     compression = require('compression'),
     path        = require('path'),
-    noteRestApi = require('./NoteRestApi');
+    noteRestApi = require('./NoteRestApi'),
+    bodyParser  = require('body-parser');
 
 app.use(morgan('short'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(compression());
 app.use('/', express.static(path.join(__dirname, '../dist')));

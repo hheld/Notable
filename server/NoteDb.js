@@ -91,3 +91,21 @@ exports.getNote = function(id) {
         }
     );
 };
+
+exports.addNote = function(note) {
+    return new Promise(
+        function(resolve, reject) {
+            var stmt = db.prepare("INSERT INTO Notes (Title, Tags, CreationDate, LastModDate, Note) VALUES (?,?,?,?,?)");
+
+            stmt.run([note.title, note.tags, note.creationDate, note.lastModDate, note.note], function(err) {
+                if(err) {
+                    return reject(err);
+                }
+            });
+
+            stmt.finalize(function() {
+                resolve();
+            });
+        }
+    );
+};
