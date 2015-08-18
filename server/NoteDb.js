@@ -64,3 +64,30 @@ exports.getAllNotes = function(from, to, tags) {
         }
     );
 };
+
+exports.getNote = function(id) {
+    return new Promise(
+        function(resolve, reject) {
+            var note = {};
+
+            db.each("SELECT * FROM Notes WHERE Id=" + id, function(err, row) {
+                if(!row) {
+                    return reject('Query for note returned no result.');
+                }
+
+                note.id           = row.Id;
+                note.title        = row.Title;
+                note.tags         = row.Tags;
+                note.creationDate = new Date(row.CreationDate);
+                note.lastModDate  = new Date(row.LastModDate);
+                note.note         = row.Note;
+            }, function(err, numRows) {
+                if(err) {
+                    reject(err);
+                } else {
+                    resolve(note);
+                }
+            });
+        }
+    );
+};

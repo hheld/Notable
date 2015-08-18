@@ -17,4 +17,21 @@ router.get('/notes', function(req, res) {
     });
 });
 
+/* E.g.: /note?id=1 */
+router.get('/note', function(req, res) {
+    var noteId = req.query.id;
+
+    if(!noteId) {
+        return res.json('Could not get note with id ' + noteId);
+    }
+
+    noteDb.getNote(noteId)
+    .then(function(note) {
+        res.json(note);
+    })
+    .catch(function(err) {
+        res.json('There was an error trying to get a note: ' + err);
+    });
+});
+
 module.exports = router;
