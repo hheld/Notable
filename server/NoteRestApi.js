@@ -17,9 +17,9 @@ router.get('/notes', function(req, res) {
     });
 });
 
-/* E.g.: /note?id=1 */
-router.get('/note', function(req, res) {
-    var noteId = req.query.id;
+/* E.g.: /note/1 */
+router.get('/note/:id', function(req, res) {
+    var noteId = req.params.id;
 
     if(!noteId) {
         return res.json('Could not get note with id ' + noteId);
