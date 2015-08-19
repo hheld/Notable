@@ -16,8 +16,8 @@ class NoteList extends React.Component {
                 <tr key={note.id} onClick={onClickHandler} className={rowClasses}>
                     <td>{note.title}</td>
                     <td>{note.tags}</td>
-                    <td>{note.creationDate}</td>
-                    <td>{note.lastModDate}</td>
+                    <td>{new Date(note.creationDate).toLocaleString()}</td>
+                    <td>{new Date(note.lastModDate).toLocaleString()}</td>
                     <td>
                         <button
                             className="btn btn-danger btn-xs"
