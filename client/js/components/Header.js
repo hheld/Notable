@@ -10,7 +10,7 @@ class Header extends React.Component {
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container">
                     <div className="navbar-header">
-                        <p className="navbar-text">Notable</p>
+                        <p className="navbar-text">Notable - Stuff to remember</p>
                     </div>
                     <ul className="nav navbar-nav navbar-right">
                         <li>
@@ -24,7 +24,7 @@ class Header extends React.Component {
                             <button
                                 className="btn btn-danger navbar-btn"
                                 onClick={this.props.onDeleteNoteClicked}>
-                                Delete selected note
+                                Delete selected note(s)
                             </button>
                         </li>
                     </ul>
