@@ -18,7 +18,13 @@ class NoteList extends React.Component {
                     <td>{note.tags}</td>
                     <td>{note.creationDate}</td>
                     <td>{note.lastModDate}</td>
-                    <td><button className="btn btn-danger btn-xs" onClick={this.props.onDeleteNote.bind(this, note.id)}>Delete</button></td>
+                    <td>
+                        <button
+                            className="btn btn-danger btn-xs"
+                            onClick={this.props.onDeleteNote.bind(this, note.id)}>
+                            Delete
+                        </button>
+                    </td>
                 </tr>
             );
         });
