@@ -4,6 +4,7 @@ import Header from './Header';
 import NoteList from './NoteList';
 import AltContainer from 'alt/AltContainer';
 import NoteStore from '../stores/NoteStore';
+import NoteViewer from './NoteViewer';
 
 class AppControllerView extends React.Component {
     constructor() {
@@ -14,7 +15,7 @@ class AppControllerView extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <Header
                     onAddNoteClicked={this.addNewNote}
                     onDeleteNoteClicked={this.deleteSelectedNote} />
@@ -38,6 +39,17 @@ class AppControllerView extends React.Component {
                         onNoteDeselected={this.deselectNote}
                         onDeleteSelectedNote={this.deleteSelectedNote}
                         onDeleteNote={this.deleteNote} />
+                </AltContainer>
+                <AltContainer
+                    stores={[NoteStore]}
+                    inject={
+                        {
+                            note: function(props) {
+                                return NoteStore.getState().lastSelectedNote;
+                            }
+                        }
+                    }>
+                    <NoteViewer note={{}} />
                 </AltContainer>
             </div>
         );
