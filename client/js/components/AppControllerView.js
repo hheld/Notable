@@ -47,7 +47,9 @@ class AppControllerView extends React.Component {
     }
 
     deleteSelectedNote() {
-        console.log('Would now delete the following notes:', NoteStore.getState().selectedIds);
+        NoteStore.getState().selectedIds.forEach((idx) => {
+            NoteActions.deleteNote(idx);
+        });
     }
 
     selectNote(id) {

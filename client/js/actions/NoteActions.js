@@ -1,5 +1,5 @@
 import alt from '../alt';
-import {getAllNotes} from '../utils/NoteService';
+import {getAllNotes, deleteNote as delNote} from '../utils/NoteService';
 
 class NoteActions {
     constructor() {
@@ -11,6 +11,16 @@ class NoteActions {
         getAllNotes()
         .then((notes) => {
             this.actions.setNotes(notes);
+        });
+
+        // allows us to have a loading state
+        this.dispatch();
+    }
+
+    deleteNote(id) {
+        delNote(id)
+        .then(() => {
+            this.actions.getAllNotes();
         });
 
         // allows us to have a loading state

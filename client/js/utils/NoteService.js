@@ -24,3 +24,19 @@ export function getAllNotes(from, to, tags) {
         }
     );
 }
+
+export function deleteNote(id) {
+    return new Promise(
+        function(resolve, reject) {
+            request
+            .del(url + '/note/' + id)
+            .end(function(err, res) {
+                if(err) {
+                    return reject(err);
+                }
+
+                resolve(res.body);
+            });
+        }
+    );
+}
