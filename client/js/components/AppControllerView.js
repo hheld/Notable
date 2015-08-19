@@ -36,7 +36,8 @@ class AppControllerView extends React.Component {
                         selectedIds={[]}
                         onNoteSelected={this.selectNote}
                         onNoteDeselected={this.deselectNote}
-                        onDeleteSelectedNote={this.deleteSelectedNote} />
+                        onDeleteSelectedNote={this.deleteSelectedNote}
+                        onDeleteNote={this.deleteNote} />
                 </AltContainer>
             </div>
         );
@@ -50,6 +51,10 @@ class AppControllerView extends React.Component {
         NoteStore.getState().selectedIds.forEach((idx) => {
             NoteActions.deleteNote(idx);
         });
+    }
+
+    deleteNote(id) {
+        NoteActions.deleteNote(id);
     }
 
     selectNote(id) {

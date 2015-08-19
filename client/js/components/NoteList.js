@@ -18,13 +18,13 @@ class NoteList extends React.Component {
                     <td>{note.tags}</td>
                     <td>{note.creationDate}</td>
                     <td>{note.lastModDate}</td>
-                    <td>---</td>
+                    <td><button className="btn btn-danger btn-xs" onClick={this.props.onDeleteNote.bind(this, note.id)}>Delete</button></td>
                 </tr>
             );
         });
 
         return (
-            <table className="table table-condensed table-striped table-hover">
+            <table className="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -47,7 +47,8 @@ NoteList.propTypes = {
     selectedIds: React.PropTypes.array.isRequired,
     onNoteSelected: React.PropTypes.func.isRequired,
     onNoteDeselected: React.PropTypes.func.isRequired,
-    onDeleteSelectedNote: React.PropTypes.func.isRequired
+    onDeleteSelectedNote: React.PropTypes.func.isRequired,
+    onDeleteNote: React.PropTypes.func.isRequired
 };
 
 NoteList.defaultProps = {
