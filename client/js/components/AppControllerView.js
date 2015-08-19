@@ -1,8 +1,7 @@
 import React from 'react';
 import AltContainer from 'alt/AltContainer';
 import AppStore from '../stores/AppStore';
-import AppActions from '../actions/AppActions';
-import CounterComp from './CounterComp';
+import Header from './Header';
 
 class AppControllerView extends React.Component {
     constructor() {
@@ -11,15 +10,22 @@ class AppControllerView extends React.Component {
 
     render() {
         return (
-            <AltContainer store={AppStore}>
-                <p>This is the AppControllerView</p>
-                <CounterComp onIncrementCounter={this._onIncrementCounter} />
+            <AltContainer>
+                <AltContainer store={AppStore}>
+                    <Header
+                        onAddNoteClicked={this.addNewNote}
+                        onDeleteNoteClicked={this.deleteSelectedNote} />
+                </AltContainer>
             </AltContainer>
         );
     }
 
-    _onIncrementCounter() {
-        AppActions.updateCounter(AppStore.getState().counter + 1);
+    addNewNote() {
+        console.log('Would now add a new note');
+    }
+
+    deleteSelectedNote() {
+        console.log('Would now delete the selected note, if any');
     }
 }
 

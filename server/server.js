@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(compression());
 app.use('/', express.static(path.join(__dirname, '../dist')));
+app.use('/thirdParty', express.static(path.join(__dirname, '../node_modules')));
 app.use('/api', noteRestApi);
 
 app.listen(port);
