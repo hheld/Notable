@@ -5,6 +5,7 @@ import NoteList from './NoteList';
 import AltContainer from 'alt/AltContainer';
 import NoteStore from '../stores/NoteStore';
 import NoteViewer from './NoteViewer';
+import NoteEditor from './NoteEditor';
 
 class AppControllerView extends React.Component {
     constructor() {
@@ -49,6 +50,13 @@ class AppControllerView extends React.Component {
                             }
                         }
                     }>
+                    <NoteEditor
+                        note={{}}
+                        onTitleChange={this.setEditedNoteTitle}
+                        onTagsChange={this.setEditedNoteTags}
+                        onNoteChange={this.setEditedNoteNote}
+                        onSaveClicked={this.saveEditedNote}
+                        onCancelClicked={this.restoreEditedNote} />
                     <NoteViewer note={{}} />
                 </AltContainer>
             </div>
@@ -75,6 +83,28 @@ class AppControllerView extends React.Component {
 
     deselectNote(id) {
         NoteActions.deselectNote(id);
+    }
+
+    setEditedNoteTitle(title) {
+        NoteActions.setEditedNoteTitle(title);
+    }
+
+    setEditedNoteTags(tags) {
+        NoteActions.setEditedNoteTags(tags);
+    }
+
+    setEditedNoteNote(note) {
+        NoteActions.setEditedNoteNote(note);
+    }
+
+    saveEditedNote() {
+        const { lastSelectedNote } = NoteStore.getState();
+
+        NoteActions.saveEditedNote(lastSelectedNote.id, lastSelectedNote);
+    }
+
+    restoreEditedNote() {
+        NoteActions.restoreNote(NoteStore.getState().lastSelectedNote.id);
     }
 }
 

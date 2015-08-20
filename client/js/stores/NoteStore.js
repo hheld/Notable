@@ -11,7 +11,10 @@ class NoteStore {
             setNotes: NoteActions.setNotes,
             gettingAllNotes: NoteActions.getAllNotes,
             selectNote: NoteActions.selectNote,
-            deselectNote: NoteActions.deselectNote
+            deselectNote: NoteActions.deselectNote,
+            setEditedNoteTitle: NoteActions.setEditedNoteTitle,
+            setEditedNoteTags: NoteActions.setEditedNoteTags,
+            setEditedNoteNote: NoteActions.setEditedNoteNote
         });
     }
 
@@ -54,6 +57,18 @@ class NoteStore {
                 this.lastSelectedNote = note;
             }
         });
+    }
+
+    setEditedNoteTitle(title) {
+        this.lastSelectedNote.title = title;
+    }
+
+    setEditedNoteTags(tags) {
+        this.lastSelectedNote.tags = tags;
+    }
+
+    setEditedNoteNote(note) {
+        this.lastSelectedNote.note = note;
     }
 }
 

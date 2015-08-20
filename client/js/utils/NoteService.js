@@ -25,11 +25,44 @@ export function getAllNotes(from, to, tags) {
     );
 }
 
+export function getNote(id) {
+    return new Promise(
+        function(resolve, reject) {
+            request
+            .get(url + '/note/' + id)
+            .end(function(err, res) {
+                if(err) {
+                    return reject(err);
+                }
+
+                resolve(res.body);
+            });
+        }
+    );
+}
+
 export function deleteNote(id) {
     return new Promise(
         function(resolve, reject) {
             request
             .del(url + '/note/' + id)
+            .end(function(err, res) {
+                if(err) {
+                    return reject(err);
+                }
+
+                resolve(res.body);
+            });
+        }
+    );
+}
+
+export function updateNote(id, note) {
+    return new Promise(
+        function(resolve, reject) {
+            request
+            .put(url + '/note/' + id)
+            .send(note)
             .end(function(err, res) {
                 if(err) {
                     return reject(err);

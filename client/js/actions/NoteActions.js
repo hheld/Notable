@@ -1,10 +1,15 @@
 import alt from '../alt';
-import {getAllNotes, deleteNote as delNote} from '../utils/NoteService';
+import {getAllNotes, deleteNote as delNote, getNote, updateNote} from '../utils/NoteService';
 
 class NoteActions {
     constructor() {
         // simply define data-pass-through-actions here like this; multiple args possible
-        this.generateActions('setNotes', 'selectNote', 'deselectNote');
+        this.generateActions('setNotes',
+        'selectNote',
+        'deselectNote',
+        'setEditedNoteTitle',
+        'setEditedNoteTags',
+        'setEditedNoteNote');
     }
 
     getAllNotes(from, to, tags) {
@@ -21,6 +26,28 @@ class NoteActions {
         delNote(id)
         .then(() => {
             this.actions.getAllNotes();
+        });
+
+        // allows us to have a loading state
+        this.dispatch();
+    }
+
+    restoreNote(id) {
+        getNote(id)
+        .then((note) => {
+            this.actions.setEditedNoteTitle(note.title);
+            this.actions.setEditedNoteTags(note.tags);
+            this.actions.setEditedNoteNote(note.note);
+        });
+
+        // allows us to have a loading state
+        this.dispatch();
+    }
+
+    saveEditedNote(id, note) {
+        updateNote(id, note)
+        .then(() => {
+            alert('Note changes stored successfully!');
         });
 
         // allows us to have a loading state
