@@ -11,6 +11,10 @@ class NoteEditor extends React.Component {
 
         const {title, tags, note} = this.props.note;
 
+        const restoreButton = this.props.note.hasOwnProperty('id') ? (
+            <button type="button" className="btn btn-warning" style={{marginLeft: 20}} onClick={this.props.onCancelClicked}>Restore from server</button>
+            ) : null;
+
         return (
             <div className="panel panel-default">
                 <div className="panel-body">
@@ -36,7 +40,7 @@ class NoteEditor extends React.Component {
                         <div className="form-group">
                             <div className="col-sm-offset-2 col-sm-10">
                                 <button type="button" className="btn btn-primary" onClick={this.props.onSaveClicked}>Save on server</button>
-                                <button type="button" className="btn btn-warning" style={{marginLeft: 20}} onClick={this.props.onCancelClicked}>Restore from server</button>
+                                {restoreButton}
                             </div>
                         </div>
                     </form>

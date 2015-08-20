@@ -1,5 +1,5 @@
 import alt from '../alt';
-import {getAllNotes, deleteNote as delNote, getNote, updateNote} from '../utils/NoteService';
+import {getAllNotes, deleteNote as delNote, getNote, updateNote, addNewNote as addNote} from '../utils/NoteService';
 
 class NoteActions {
     constructor() {
@@ -9,7 +9,8 @@ class NoteActions {
         'deselectNote',
         'setEditedNoteTitle',
         'setEditedNoteTags',
-        'setEditedNoteNote');
+        'setEditedNoteNote',
+        'editNewNote');
     }
 
     getAllNotes(from, to, tags) {
@@ -48,6 +49,18 @@ class NoteActions {
         updateNote(id, note)
         .then(() => {
             alert('Note changes stored successfully!');
+        });
+
+        // allows us to have a loading state
+        this.dispatch();
+    }
+
+    addNewNote(note) {
+        addNote(note)
+        .then(() => {
+            alert('Successfully added the new note.');
+
+            this.actions.getAllNotes();
         });
 
         // allows us to have a loading state

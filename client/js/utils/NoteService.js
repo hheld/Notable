@@ -73,3 +73,20 @@ export function updateNote(id, note) {
         }
     );
 }
+
+export function addNewNote(note) {
+    return new Promise(
+        function(resolve, reject) {
+            request
+            .post(url + '/note')
+            .send(note)
+            .end(function(err, res) {
+                if(err) {
+                    return reject(err);
+                }
+
+                resolve(res.body);
+            });
+        }
+    );
+}

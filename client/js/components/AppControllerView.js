@@ -64,7 +64,7 @@ class AppControllerView extends React.Component {
     }
 
     addNewNote() {
-        console.log('Would now add a new note');
+        NoteActions.editNewNote();
     }
 
     deleteSelectedNote() {
@@ -100,7 +100,12 @@ class AppControllerView extends React.Component {
     saveEditedNote() {
         const { lastSelectedNote } = NoteStore.getState();
 
-        NoteActions.saveEditedNote(lastSelectedNote.id, lastSelectedNote);
+        if(lastSelectedNote.hasOwnProperty('id')) {
+            NoteActions.saveEditedNote(lastSelectedNote.id, lastSelectedNote);
+        } else {
+            // add totally new note
+            NoteActions.addNewNote(lastSelectedNote);
+        }
     }
 
     restoreEditedNote() {
