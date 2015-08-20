@@ -8,7 +8,8 @@ class NoteList extends React.Component {
     render() {
         let notes = this.props.notes.map((note) => {
             let isSelected = this.props.selectedIds.indexOf(note.id)!==-1;
-            let rowClasses = isSelected ? 'info' : '';
+            let isLastSelected = this.props.selectedIds[this.props.selectedIds.length-1] === note.id;
+            let rowClasses = isSelected ? (isLastSelected ? 'warning' : 'info') : '';
             let onClickHandler = isSelected ? this.props.onNoteDeselected.bind(this, note.id)
                                             : this.props.onNoteSelected.bind(this, note.id);
 
