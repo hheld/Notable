@@ -12,10 +12,15 @@ class NoteViewer extends React.Component {
         const { note } = this.props.note,
                   noteHtml = marked(note || '');
 
+        const tags = this.props.note.tags.split(' ').map((tag, i) => {
+            return (<span key={i} className="label label-default" style={{marginLeft: 10}}>{tag}</span>);
+        });
+
         return (
-            <div className="panel panel-primary">
+            <div className="panel panel-default">
                 <div className="panel-heading">{this.props.note.title}</div>
                 <div className="panel-body" dangerouslySetInnerHTML={{__html: noteHtml}} />
+                <div className="panel-footer">{tags}</div>
             </div>
         );
     }
