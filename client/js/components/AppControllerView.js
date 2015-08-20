@@ -50,6 +50,7 @@ class AppControllerView extends React.Component {
                             }
                         }
                     }>
+                    <NoteViewer note={{}} />
                     <NoteEditor
                         note={{}}
                         onTitleChange={this.setEditedNoteTitle}
@@ -57,7 +58,6 @@ class AppControllerView extends React.Component {
                         onNoteChange={this.setEditedNoteNote}
                         onSaveClicked={this.saveEditedNote}
                         onCancelClicked={this.restoreEditedNote} />
-                    <NoteViewer note={{}} />
                 </AltContainer>
             </div>
         );
