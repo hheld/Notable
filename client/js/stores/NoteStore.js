@@ -78,7 +78,7 @@ class NoteStore {
         this.lastSelectedNote = {
             title: 'Enter title here',
             tags: 'Enter tags here',
-            note: 'Enter tags here'
+            note: 'Enter note here'
         };
     }
 }
