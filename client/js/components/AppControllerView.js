@@ -41,6 +41,7 @@ class AppControllerView extends React.Component {
                         onDeleteSelectedNote={this.deleteSelectedNote}
                         onDeleteNote={this.deleteNote} />
                 </AltContainer>
+                <div style={{height: 50}} />
                 <AltContainer
                     stores={[NoteStore]}
                     inject={

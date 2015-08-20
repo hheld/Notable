@@ -31,20 +31,22 @@ class NoteList extends React.Component {
         });
 
         return (
-            <table className="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Tags</th>
-                        <th>Creation date</th>
-                        <th>Modification date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {notes}
-                </tbody>
-            </table>
+            <div style={{overflow: 'auto', height: 350}}>
+                <table className="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Tags</th>
+                            <th>Creation date</th>
+                            <th>Modification date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {notes}
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }
