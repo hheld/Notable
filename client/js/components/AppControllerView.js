@@ -17,9 +17,25 @@ class AppControllerView extends React.Component {
     render() {
         return (
             <div className="container">
-                <Header
-                    onAddNoteClicked={this.addNewNote}
-                    onDeleteNoteClicked={this.deleteSelectedNote} />
+                <AltContainer
+                    stores={[NoteStore]}
+                    inject={
+                        {
+                            numOfNotes: function(props) {
+                                return NoteStore.getState().notes.length;
+                            },
+
+                            numOfSelectedNotes: function(props) {
+                                return NoteStore.getState().selectedIds.length;
+                            }
+                        }
+                    }>
+                    <Header
+                        onAddNoteClicked={this.addNewNote}
+                        onDeleteNoteClicked={this.deleteSelectedNote}
+                        numOfNotes={0}
+                        numOfSelectedNotes={0} />
+                </AltContainer>
                 <AltContainer
                     stores={[NoteStore]}
                     inject={
