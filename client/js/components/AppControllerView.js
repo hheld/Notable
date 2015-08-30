@@ -6,12 +6,23 @@ import AltContainer from 'alt/AltContainer';
 import NoteStore from '../stores/NoteStore';
 import NoteViewer from './NoteViewer';
 import NoteEditor from './NoteEditor';
+import Mousetrap from 'mousetrap';
 
 class AppControllerView extends React.Component {
     constructor() {
         super();
 
         NoteActions.getAllNotes();
+    }
+
+    componentDidMount() {
+        Mousetrap.bind(['ctrl+a'], this.selectAllNotes);
+        Mousetrap.bind(['ctrl+l'], this.deselectAllNotes);
+    }
+
+    componentWillUnmount() {
+        Mousetrap.unbind(['ctrl+a'], this.selectAllNotes);
+        Mousetrap.unbind(['ctrl+l'], this.deselectAllNotes);
     }
 
     render() {
@@ -78,6 +89,16 @@ class AppControllerView extends React.Component {
                 </AltContainer>
             </div>
         );
+    }
+
+    selectAllNotes(e) {
+        NoteActions.selectAllNotes();
+        e.preventDefault();
+    }
+
+    deselectAllNotes(e) {
+        NoteActions.deselectAllNotes();
+        e.preventDefault();
     }
 
     addNewNote() {

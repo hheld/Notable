@@ -10,7 +10,9 @@ class NoteActions {
         'setEditedNoteTitle',
         'setEditedNoteTags',
         'setEditedNoteNote',
-        'editNewNote');
+        'editNewNote',
+        'selectAllNotes',
+        'deselectAllNotes');
     }
 
     getAllNotes(from, to, tags) {

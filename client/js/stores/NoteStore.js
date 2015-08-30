@@ -15,7 +15,9 @@ class NoteStore {
             setEditedNoteTitle: NoteActions.setEditedNoteTitle,
             setEditedNoteTags: NoteActions.setEditedNoteTags,
             setEditedNoteNote: NoteActions.setEditedNoteNote,
-            editNewNote: NoteActions.editNewNote
+            editNewNote: NoteActions.editNewNote,
+            selectAllNotes: NoteActions.selectAllNotes,
+            deselectAllNotes: NoteActions.deselectAllNotes
         });
     }
 
@@ -80,6 +82,20 @@ class NoteStore {
             tags: 'Enter tags here',
             note: 'Enter note here'
         };
+    }
+
+    selectAllNotes() {
+        this.selectedIds = this.notes.map((note) => {
+            return note.id;
+        });
+
+        this.updateLastSelectedNote();
+    }
+
+    deselectAllNotes() {
+        this.selectedIds = [];
+
+        this.updateLastSelectedNote();
     }
 }
 
