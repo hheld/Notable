@@ -1,5 +1,4 @@
 import React from 'react';
-import marked from 'marked';
 
 class NoteEditor extends React.Component {
     constructor() {
