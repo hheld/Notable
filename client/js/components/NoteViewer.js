@@ -35,7 +35,7 @@ class NoteViewer extends React.Component {
                         <li className="list-group-item list-group-item-info">Last modified {modDateBadge}</li>
                     </ul>
                 </div>
-                <div className="panel-body" dangerouslySetInnerHTML={{__html: noteHtml}} />
+                <div className="panel-body" dangerouslySetInnerHTML={{__html: noteHtml}} style={{overflow: "auto"}} />
                 <div className="panel-footer">{tags}</div>
             </div>
         );
